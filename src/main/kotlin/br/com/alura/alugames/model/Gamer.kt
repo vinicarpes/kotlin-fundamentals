@@ -5,7 +5,8 @@ import java.time.LocalDate
 import java.util.Scanner
 import kotlin.random.Random
 
-class Gamer (var nome: String, var email: String){
+class Gamer (var nome: String,
+             var email: String){
     var dataNascimento: String? =  null
     var usuario: String? = null
         set(value){
@@ -19,6 +20,7 @@ class Gamer (var nome: String, var email: String){
 
     val jogosBuscados = mutableListOf<Jogo>()
     val jogosAlugados = mutableListOf<Aluguel>()
+    var plano : Plano = Plano("BRONZE")
 
     init {
         if (nome.isBlank()){
