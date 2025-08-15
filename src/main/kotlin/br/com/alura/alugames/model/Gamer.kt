@@ -5,8 +5,8 @@ import java.time.LocalDate
 import java.util.Scanner
 import kotlin.random.Random
 
-class Gamer (var nome: String,
-             var email: String){
+data class Gamer (var nome: String,
+             var email: String) : Recomendavel {
     var dataNascimento: String? =  null
     var usuario: String? = null
         set(value){
@@ -21,6 +21,14 @@ class Gamer (var nome: String,
     val jogosBuscados = mutableListOf<Jogo>()
     val jogosAlugados = mutableListOf<Aluguel>()
     var plano : Plano = PlanoAvulso("BRONZE")
+    private val listaNotas = mutableListOf<Int>()
+
+    override val media: Double
+        get() = listaNotas.average()
+
+    override fun recomendar(nota: Int) {
+        listaNotas.add(nota)
+    }
 
     init {
         if (nome.isBlank()){
@@ -37,7 +45,7 @@ class Gamer (var nome: String,
         }
 
     override fun toString(): String {
-        return "\n\nGamer: \nNome = '$nome', \nEmail = '$email', \nData Nascimento = $dataNascimento, \nUsuario = $usuario, \nidInterno = $idInterno"
+        return "\n\nGamer: \nNome = '$nome', \nEmail = '$email', \nData Nascimento = $dataNascimento, \nUsuario = $usuario, \nidInterno = $idInterno \nReputação: $media"
     }
 
     fun criarIdInterno(){
