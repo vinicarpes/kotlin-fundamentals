@@ -2,8 +2,13 @@ package org.example.br.com.alura.alugames.services
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import org.example.br.com.alura.alugames.model.Gamer
 import org.example.br.com.alura.alugames.model.InfoGamerJson
 import org.example.br.com.alura.alugames.model.InfoJogo
+import org.example.br.com.alura.alugames.model.InfoJogoJson
+import org.example.br.com.alura.alugames.model.Jogo
+import org.example.br.com.alura.alugames.utils.criaGamer
+import org.example.br.com.alura.alugames.utils.criaJogo
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
@@ -11,8 +16,8 @@ import java.net.http.HttpResponse
 
 class ConsumoApi {
 
-    fun buscaJogo (id : Int) :  InfoJogo{
-        val endereco = "https://www.cheapshark.com/api/1.0/games?id=$id"
+    fun buscaJogos () :  List<Jogo>{
+        val endereco = "https://raw.githubusercontent.com/jeniblodev/arquivosJson/main/jogos.json"
 
         val client: HttpClient = HttpClient.newHttpClient()
         val request = HttpRequest.newBuilder()
@@ -24,12 +29,17 @@ class ConsumoApi {
 
 
         val gson = Gson()
-        val meuInfoJogo = gson.fromJson(json, InfoJogo::class.java)
+        val meuJogoTipo = object : TypeToken<List<InfoJogoJson>>() {}.type
+        val listaJogos : List<InfoJogoJson> = gson.fromJson(json, meuJogoTipo)
 
-        return meuInfoJogo
+        val listaJogoConvertida = listaJogos.map { infoJogoJson ->
+            infoJogoJson.criaJogo()
+        }
+
+        return listaJogoConvertida
     }
 
-    fun buscaGamers() : List<InfoGamerJson>{
+    fun buscaGamers() : List<Gamer>{
         val endereco = "https://raw.githubusercontent.com/jeniblodev/arquivosJson/main/gamers.json"
 
         val client: HttpClient = HttpClient.newHttpClient()
@@ -45,7 +55,11 @@ class ConsumoApi {
         val meuGamerTipo = object : TypeToken<List<InfoGamerJson>> () {}.type
         val listaGamers : List<InfoGamerJson> = gson.fromJson(json, meuGamerTipo)
 
-        return listaGamers
+        val listaGamerConvertida = listaGamers.map { infoGamerJson ->
+            infoGamerJson.criaGamer()
+        }
+
+        return listaGamerConvertida
     }
 
 }

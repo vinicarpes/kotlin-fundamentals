@@ -1,10 +1,12 @@
 package org.example.br.com.alura.alugames.model
 
-class Jogo(val titulo: String,
-           val capa: String) {
-    var descricao: String? = null
-
+class Jogo(
+    val titulo: String,
+    val capa: String,
+    val descricao: String,
+    val preco: Double
+) {
     override fun toString(): String {
-        return "Jogo: \ntitulo = '$titulo', \ncapa =' $capa', \ndescricao =' $descricao')"
+        return "\n\nJogo: \nTitulo='$titulo', \nCapa='$capa', \nDescricao='$descricao', \nPre'ç'o=$preco)"
     }
 }

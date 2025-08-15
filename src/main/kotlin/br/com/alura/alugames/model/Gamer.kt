@@ -33,7 +33,7 @@ class Gamer (var nome: String, var email: String){
         }
 
     override fun toString(): String {
-        return "Gamer(nome='$nome', email='$email', dataNascimento=$dataNascimento, usuario=$usuario, idInterno=$idInterno)"
+        return "\n\nGamer: \nNome = '$nome', \nEmail = '$email', \nData Nascimento = $dataNascimento, \nUsuario = $usuario, \nidInterno = $idInterno"
     }
 
     fun criarIdInterno(){
