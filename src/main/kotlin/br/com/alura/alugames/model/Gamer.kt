@@ -1,6 +1,7 @@
 package org.example.br.com.alura.alugames.model
 
 import java.lang.invoke.StringConcatFactory
+import java.time.LocalDate
 import java.util.Scanner
 import kotlin.random.Random
 
@@ -50,6 +51,10 @@ class Gamer (var nome: String, var email: String){
         }else{
             throw IllegalArgumentException("Email invalido")
         }
+    }
+
+    fun alugaJogo(jogo: Jogo, periodo: Periodo) : Aluguel{
+        return Aluguel(this, jogo, periodo)
     }
 
     companion object {
