@@ -20,7 +20,7 @@ class Gamer (var nome: String,
 
     val jogosBuscados = mutableListOf<Jogo>()
     val jogosAlugados = mutableListOf<Aluguel>()
-    var plano : Plano = Plano("BRONZE")
+    var plano : Plano = PlanoAvulso("BRONZE")
 
     init {
         if (nome.isBlank()){
