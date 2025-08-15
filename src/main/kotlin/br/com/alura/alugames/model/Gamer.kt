@@ -18,6 +18,7 @@ class Gamer (var nome: String, var email: String){
        private set
 
     val jogosBuscados = mutableListOf<Jogo>()
+    val jogosAlugados = mutableListOf<Aluguel>()
 
     init {
         if (nome.isBlank()){
@@ -54,7 +55,9 @@ class Gamer (var nome: String, var email: String){
     }
 
     fun alugaJogo(jogo: Jogo, periodo: Periodo) : Aluguel{
-        return Aluguel(this, jogo, periodo)
+        val aluguel = Aluguel(this, jogo, periodo)
+        jogosAlugados.add(aluguel)
+        return aluguel
     }
 
     companion object {
